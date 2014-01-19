@@ -638,6 +638,9 @@ header.site-header nav ul li a:hover {
   margin-bottom: 66px;
   position: relative;
 }
+li.home-list{
+  margin-bottom: 30px !important;
+}
 .archive-wrap .post-list li a {
   position: relative;
 }
@@ -647,6 +650,12 @@ header.site-header nav ul li a:hover {
   -webkit-transition: all 1s ease-in-out;
   -ms-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
+}
+.flat a:before{
+  content: '' !important;
+}
+.flat a:hover:before{
+  content: '' !important;
 }
 .archive-wrap .post-list li a:hover:before {
   content: '...';
