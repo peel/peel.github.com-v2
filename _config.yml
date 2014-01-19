@@ -2,18 +2,17 @@ title:            Infix Notes
 tagline:          Notes from somewhere inbetween software and delivery by Piotr Limanowski. 
 description:      Notes from somewhere inbetween software and delivery by Piotr Limanowski.
 #Comment out url when working locally to resolve base urls correctly
-url: http://peel.github.io
+#url: http://localhost:4000
 
 # Owner/author information
 owner:
   name:           Piotr Limanowski 
-  avatar:         avatar.png
   bio:            "Notes from somewhere inbetween software and delivery by Piotr Limanowski."
   email:          plimanowski@icloud.com
   twitter:        peel        
   github:         peel       
   instagram:      peel
-  disqus:         peelblog
+  disqus:         peelblog 
   photo:          https://pbs.twimg.com/profile_images/418525126536466432/GOuuCnWT_bigger.jpeg 
   # Plug in your disqus shortname!
 
