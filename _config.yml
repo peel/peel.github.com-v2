@@ -11,10 +11,9 @@ owner:
   email:          plimanowski@icloud.com
   twitter:        peel        
   github:         peel       
-  instagram:      peel
+  instagram:      peel 
   disqus:         peelblog 
   photo:          https://pbs.twimg.com/profile_images/418525126536466432/GOuuCnWT_bigger.jpeg 
-  # Plug in your disqus shortname!
 
 # Links to include in top navigation
 # For external links add external: true
