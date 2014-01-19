@@ -1,40 +1,33 @@
-title:            Balzac
-tagline:          A beautiful theme.
-description:      Insouciant.
+title:            Infix Notes
+tagline:          Notes from somewhere inbetween software and delivery by Piotr Limanowski. 
+description:      Notes from somewhere inbetween software and delivery by Piotr Limanowski.
 #Comment out url when working locally to resolve base urls correctly
-url: http://jekyll.gtat.me
+url: http://peel.github.io
 
 # Owner/author information
 owner:
-  name:           Cole Townsend
+  name:           Piotr Limanowski 
   avatar:         avatar.png
-  bio:            "Insouciant"
-  email:          cole@coletownsend.com
-  twitter:        twnsndco        
-  github:         coletownsend       
-  instagram:      twnsnd     
-  dribbble:       coletownsend
+  bio:            "Notes from somewhere inbetween software and delivery by Piotr Limanowski."
+  email:          plimanowski@icloud.com
+  twitter:        peel        
+  github:         peel       
+  instagram:      peel
   disqus:         balzac
+  photo:          https://pbs.twimg.com/profile_images/418525126536466432/GOuuCnWT_bigger.jpeg 
   # Plug in your disqus shortname!
-  
 
 # Links to include in top navigation
 # For external links add external: true
 links:
   - title: About
     url: /about
-  - title: Donate
-    url: http://gtat.me/balzac/donate
-    external: true
   - title: Github
-    url: https://github.com/ColeTownsend/Balzac-for-Jekyll
-    external: true
-  - title: Cole Who?
-    url: http://coletownsend.com
+    url: https://github.com/peel
     external: true
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:    America/New_York
+timezone:    Europe/Warsaw
 future:      true
 pygments:    true
 markdown:    kramdown

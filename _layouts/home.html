@@ -2,15 +2,50 @@
 
     <div id='bump'>
         <section class="article archive">
-          <article class="archive-wrap">
+          <article class="archive-wrap home">
               <ol class="post-list">
-                 <lh><h2><span class="bb">{{ page.title }}</span></h2></lh>
-                  {% for post in site.posts %}
-                  <li>
+                 <lh><div class="circular" style="width: 60px;height: 60px;border-radius: 30px;-webkit-border-radius: 30px;-moz-border-radius: 30px;background: url({{site.owner.photo}}) no-repeat;margin:0 0 -50px -80px;float:left;"></div><h2><span class="bb">Piotr Limanowski<a href="/resume">⇝</a></span></h2></lh>
+                  <li class="home-list">
+                    <div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+                        <p class="flat">
+                          I am a Java & Scala developer based in Gdansk, PL.  λ and ω, vim-believer, sneakerfreak, denimgeek, tech junkie & future hoverboard owner.
+                          Aside from shipping software and delivering impact I <a href="/articles">write</a>, <a href="/talks">talk</a>, <a href="{{owner.github}}">github</a> and <a href="{{owner.github}}">geek out</a>.
+                        </p>
+                        <p class="flat">
+                          You can see my detailed <a href="">resume</a> and contact me on <a href="http://twitter.com/peel">twitter</a> or via <a href="mailto:plimanowski@icloud.com">email</a>.</p>
+                        </p>
+                    </div>
+                  </li>
+
+                 <lh><h2><span class="bb">Articles<a href="/articles">⇝</a></span></h2></lh>
+                  {% for post in site.categories.articles limit:3 %}
+                  <li class="home-list">
                     <div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
                         <h1><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h1>
                         <p class="date"><time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%B %d, %Y" }}</time></p>
                         <p class="">{% if post.description %}{{ post.description  | strip_html | strip_newlines | truncate: 120 }}{% else %}{{ post.content | strip_html | strip_newlines | truncate: 120 }}{% endif %}</p>
+                    </div>
+                  </li>
+                  {% endfor %}
+
+                 <lh><h2><span class="bb">Talks<a href="/talks">⇝</a></span></h2></lh>
+                  {% for post in site.categories.talks limit:3 %}
+                  <li class="home-list">
+                    <div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+                        <h1><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h1>
+                        <p class="date"><time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%Y" }}</time></p>
+                        <p class="">{% if post.description %}{{ post.description  | strip_html | strip_newlines | truncate: 120 }}{% else %}{{ post.content | strip_html | strip_newlines | truncate: 120 }}{% endif %}</p>
+                    </div>
+                  </li>
+                  {% endfor %}
+
+                 <lh><h2><span class="bb">Projects<a href="/projects">⇝</a></span></h2></lh>
+                  {% for post in site.categories.projects limit:3 %}
+                  <li class="home-list">
+                    <div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+                        <h1><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h1>
+                        <p class="date"><time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%Y" }}</time></p>
+                        <!-- <p class="">{% if post.description %}{{ post.description  | strip_html | strip_newlines | truncate: 120 }}{% else %}{{ post.content | strip_html | strip_newlines | truncate: 120 }}{% endif %}</p> -->
                     </div>
                   </li>
                   {% endfor %}
