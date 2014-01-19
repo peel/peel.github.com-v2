@@ -2,23 +2,36 @@
 layout: post-no-feature
 permalink: /about/index.html
 title: About Me 
-description: Software Engineering professional with creative talent, analytical abilities, great people skills and passion. Appreciated team worker and eager to work in new technologies new-experience-seeker. Always paying attention to detail open-source enthusiast and commiter.
+description: Software Engineering professional with creative talent, analytical abilities, great people skills and passion. Appreciated team worker and eager to work in new technologies new-experience-seeker. Always paying attention to detail open-source enthusiast and commiter. 
 tags: [about, Jekyll, theme, responsive]
 ---
 
-This is built on Semantic.gs grid framework which I edited a bit to make it fluid. I hope you enjoy using, forking, whatevering this theme as much as I did making it. 
+For full resume see [here](/resume).
 
-### Features
-* flexible, uses max-width for responsive goodness
-* responsive drop down menu
-* retina images using @2x
-* post loop in the footer showing 3 latest post
-* custom portfolio page for case studies
+## Experience
 
-### Acknowledgements
-I utilized my own HTML templates, but had no prior knowledge of liquid nor the required Jekyll system file format. I took [Michael Rose](http://twitter.com/mmistakes)'s theme [Minimal Mistakes](http://mmistakes.github.io/minimal-mistakes/). Having a prebuilt archive and the YAML front-matter already set up was a great help. 
+### Nordea
 
- The lovely font shown here is Calendas. For full splendor on your blog, I suggest you [head over and buy that](http://calendasplus.com/). The full family is 3 weights and costs $3. Many thanks to Daniel Bruce for the wonderful Entypo icons. Those can be picked up at [entypo.com](http://entypo.com), but are included with the source files. It's also <b>retina ready</b> via retina.js. Check out how that works over at [retinajs.com](http://retinajs.com).
+#### Software Architect 
 
-### The Name
-Balzac was a famous writer, known for his beautiful prose. I read some Balzac in school, but mostly feel comfort in the name of my favorite coffee shop in Stratford, Ontario. 
+01/2013 - Present
+
+### Nordea
+
+#### Software Developer 
+
+03/2012 - 12/2012
+
+### KAOS
+
+#### Java Developer 
+
+09/2011 - 03/2012
+
+### PixNet 
+
+#### Web Developer 
+
+01/2009 - 09/2011
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d74392.56367279601!2d18.688529099999997!3d54.36108734999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1390165714891" width="1920" height="200" frameborder="0" style="border:0;position:absolute;width:100%;height:200px;left:0;-webkit-filter: grayscale(100%);-moz-filter: grayscale(100%);filter: grayscale(100%);"></iframe>
