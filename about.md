@@ -8,7 +8,7 @@ tags: [about, Jekyll, theme, responsive]
 
 For full resume see [here](/resume).
 
-# Experience
+# Experience - Select Projects
 
 ## Nordea
 
@@ -30,7 +30,9 @@ Java, EJB3, JAX-WS, JAX-RS, Oracle, Ruby
 
 ## KAOS
 
-### Department Of Education, Java Developer 
+I was selected for the project through an International Exchange Bureau. As a part of the team I coded several parts of a distributed system for the Department of Education.
+
+### Java Developer, Department Of Education 
 
 09/2011 - 03/2012
 
