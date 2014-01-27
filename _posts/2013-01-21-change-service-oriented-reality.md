@@ -20,7 +20,7 @@ With a clear goal in mind and only a bit of domain identification, an observatio
 ## The Mini Services
 
 Being pragmatists we wanted to facilitate people's knowledge of the domain where it was crucial. Yet had to avoid too much modeling for the rest. We expected simple and pluggable APIs that encapsulated an **independent part** of a domain. All that in an application small enough one can really [fit in his head](http://vimeo.com/24681032). 
-At the time we came up with the idea of something, for the lack of the better name, I call 'mini services'. Something in-between the webserver stack and the [micro services](http://www.infoq.com/presentations/Micro-Services).
+At the time we came up with the idea of something, for the lack of a better name, I call 'mini services'. Something in-between the webserver stack and the [micro services](http://www.infoq.com/presentations/Micro-Services).
 The concept of modularization is certainly not a new one. The growing micro-service architectures are just a variation of the [Component-based development (CBD)](http://en.wikipedia.org/wiki/Component-based_software_engineering).   
 
 The micro-services implementation of the CBD assumes full decoupling on both deployment as well as interfacing level. Unlike micro-services we kept our services in a web cluster for sake of keeping the mental model and the familiar tools - see Rich Hickey's [talk](http://www.infoq.com/presentations/Simple-Made-Easy). Still,  the deployments are only a couple of classes in size.  
