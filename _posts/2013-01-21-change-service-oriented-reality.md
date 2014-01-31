@@ -3,7 +3,7 @@ layout: post-no-feature
 title: "Change: The Service Oriented Reality"
 description: "Change, impact, effect, reaction. As similar as they might seem some of the concepts revolving around the software change are in fact orthogonal.  
   
-The change that drives the business software evolution is twofold. It takes both business and technical change. Both the impact of feature as well as it's maintenance. That is why seemingly orthogonal concepts fit together so well. "
+The change that drives the business software evolution is twofold. It takes both business and technical change. Both the impact of a feature as well as it's maintenance. That is why seemingly orthogonal concepts fit together so well. "
 category: articles
 tags: [architecture, programming, java]
 ---
@@ -176,4 +176,4 @@ Do a few of both core and unique services. Prepare a walking skeleton. Wait till
 
 From the current perspective the only thing I might argue is whether the decision of having services in a single runtime environment was the right tradeoff. It does not overly simplify the deployment nor provides any breakthrough features. On the contrary it does make cross-bundle interaction possible. However the time for the company's developers to pick up the idea, using the familiar tools is now extremely low.
 
-We are now running dozens of services everyone in the development team should be able to fit into their head. The most of the problems are being solved by the outermost line of support. The delivery time is close enough to what we wanted. 
+We are now running dozens of services everyone in the development team should be able to fit into their head. The most of the problems are being solved by the outermost line of support. The delivery time is close enough to what we wanted.
