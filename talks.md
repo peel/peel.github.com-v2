@@ -1,5 +1,5 @@
 ---
-layout: post-index 
+layout: talk-index 
 permalink: /talks/index.html
 title: "Talks"
 name: talks
