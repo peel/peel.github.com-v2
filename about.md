@@ -6,7 +6,7 @@ description: Software Engineering professional with creative talent, analytical 
 tags: [about, Jekyll, theme, responsive]
 ---
 
-For full resume see [here](/resume).
+For full resume see [here](/resume.pdf).
 
 # Experience - Select Projects
 

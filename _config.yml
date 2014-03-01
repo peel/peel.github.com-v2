@@ -20,6 +20,8 @@ owner:
 links:
   - title: About
     url: /about
+  - title: Resume
+    url: /resume.pdf
   - title: Github
     url: https://github.com/peel
     external: true
