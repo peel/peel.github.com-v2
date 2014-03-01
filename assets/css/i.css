@@ -232,7 +232,7 @@ blockquote, blockquote p {
 }
 /************ Basic *************/
 body {
-  font-family: "Calendas Plus", "Crimson Text", "Hoefler Text", "Georgia", serif;
+  font-family: "Roboto Slab", "Calendas Plus", "Crimson Text", "Hoefler Text", "Georgia", serif;
   color: #3b3b3b;
   -webkit-font-smoothing: antialiased;
   /* Fix for webkit rendering */
@@ -244,7 +244,7 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: "Calendas Plus", "Crimson Text", "Hoefler Text", "Georgia", serif;
+  font-family: "Roboto Slab", "Calendas Plus", "Crimson Text", "Hoefler Text", "Georgia", serif;
 }
 
 p {
@@ -356,7 +356,7 @@ input {
   background: none;
   outline: none;
   width: 100%;
-  font-family: "Calendas Plus", "Crimson Text", "Hoefler Text", "Georgia", serif;
+  font-family: "Roboto Slab","Calendas Plus", "Crimson Text", "Hoefler Text", "Georgia", serif;
 }
 .archive input:focus {
   background: white;
