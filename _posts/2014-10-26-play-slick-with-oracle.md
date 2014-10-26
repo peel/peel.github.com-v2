@@ -20,7 +20,7 @@ libraryDependencies ++= "com.typesafe.slick" %% "slick-extensions" % "2.0.0" ::
 # Configuration
 In Play `application.conf` file set your database connection settings to (whereas default is db name):
 
-{% highlight %}
+{% highlight scala %}
 db.default.slickdriver=com.typesafe.slick.driver.oracle.OracleDriver  
 db.default.driver=oracle.jdbc.OracleDriver  
 db.default.url="jdbc:oracle:thin:@host:1521:sid"  
