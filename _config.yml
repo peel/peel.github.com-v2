@@ -1,4 +1,4 @@
-title:            Infix Notes 
+title:            Infix Notes
 tagline:          Notes on scala, java, play! and AOSP - the dev and the core of development hardcore curated by Piotr Limanowski. 
 description:      Notes on scala, java, play! and AOSP - the dev and the core of development hardcore curated by Piotr Limanowski.
 #Comment out url when working locally to resolve base urls correctly
@@ -9,10 +9,10 @@ owner:
   name:           Piotr Limanowski 
   bio:            "Notes from somewhere inbetween software and delivery by Piotr Limanowski."
   email:          plimanowski@icloud.com
-  twitter:        peel        
-  github:         peel       
-  instagram:      peel 
-  disqus:         peelblog 
+  twitter:        peel
+  github:         peel
+  instagram:      peel
+  disqus:         peelblog
   photo:          https://pbs.twimg.com/profile_images/418525126536466432/GOuuCnWT_bigger.jpeg 
 
 # Links to include in top navigation
@@ -29,7 +29,7 @@ links:
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    Europe/Warsaw
 future:      true
-pygments:    true
+highlighter: pygments
 markdown:    kramdown
 
 kramdown:
