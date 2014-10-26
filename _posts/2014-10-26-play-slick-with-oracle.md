@@ -17,15 +17,15 @@ libraryDependencies ++= "com.typesafe.slick" %% "slick-extensions" % "2.0.0" ::
 {% endhighlight %}
 
 # Configuration
-In Play application.conf file set your database connection settings to (whereas default is db name):
+In Play `application.conf` file set your database connection settings to (whereas default is db name):
 
-```
+{% highlight %}
 db.default.slickdriver=com.typesafe.slick.driver.oracle.OracleDriver  
 db.default.driver=oracle.jdbc.OracleDriver  
 db.default.url="jdbc:oracle:thin:@host:1521:sid"  
 db.default.user=username  
 db.default.password="password"  
-```
+{% endhighlight %}
 
 # Usage
 In your model classes import `import com.typesafe.slick.driver.oracle.OracleDriver.simple._` and you're good to go.
