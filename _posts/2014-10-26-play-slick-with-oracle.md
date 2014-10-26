@@ -1,7 +1,8 @@
 ---
 layout: post-no-feature
 title: "Play Slick with Oracle"
-description: "Working with Oracle database never is a pleasure. Right on from the environment setup till the very first CRUD operations. Yet often times we're forced to do so. Here's a quick guide on how to integrate Oracle into Play/Slick app."
+description: "Working with Oracle database never is a pleasure. Right on from the environment setup till the very first CRUD operations. Yet often times we're forced to do so. 
+As I haven't found one, here's a quick guide on how to integrate Oracle into Play/Slick app."
 category: articles
 tags: [scala, programming, play]
 ---
