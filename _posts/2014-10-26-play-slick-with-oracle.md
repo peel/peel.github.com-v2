@@ -30,3 +30,12 @@ db.default.password="password"
 
 # Usage
 In your model classes import `import com.typesafe.slick.driver.oracle.OracleDriver.simple._` and you're good to go.
+
+# Known Issues
+
+## AutoInc Id
+A known issue with Oracle database is that whenever passing an empty value or nothing with an AutoInc index the db complains.
+To solve the issue you must provide the value which effectively means no AutoInc at all.
+Thus, I employed a simple solution of creating a spin-off data object without the id (and in most cases it is also my domain object as I usually don't need ids) and then map it into the DB-compatible one.
+For the last task you might use a type class (I would not recommend using [implicit conversion](http://stackoverflow.com/questions/8524878/implicit-conversion-vs-type-class)).
+
