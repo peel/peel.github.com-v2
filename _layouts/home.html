@@ -17,17 +17,6 @@
                     </div>
                   </li>
 
-                  <lh><h2><span class="bb"><a href="/articles"><span style="color:#3b3b3b">Articles</span> ⇝</a></span></h2></lh>
-                  {% for post in site.categories.articles limit:6 %}
-                  <li class="home-list">
-                    <div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-                        <h1><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h1>
-                        <p class="date"><time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%B %d, %Y" }}</time></p>
-                        <p class="">{% if post.description %}{{ post.description  | strip_html | strip_newlines | truncate: 120 }}{% else %}{{ post.content | strip_html | strip_newlines | truncate: 120 }}{% endif %}</p>
-                    </div>
-                  </li>
-                  {% endfor %}
-
                   <lh><h2><span class="bb"><a href="/talks"><span style="color:#3b3b3b">Talks</span> ⇝</a></span></h2></lh>
                   {% for post in site.categories.talks limit:6 %}
                   <li class="home-list">
@@ -39,16 +28,17 @@
                   </li>
                   {% endfor %}
 
-                  <lh><h2><span class="bb"><a href="/projects"><span style="color:#3b3b3b">Projects</span> ⇝</a></span></h2></lh>
-                  {% for post in site.categories.projects limit:3 %}
+                  <lh><h2><span class="bb"><a href="/articles"><span style="color:#3b3b3b">Articles</span> ⇝</a></span></h2></lh>
+                  {% for post in site.categories.articles limit:6 %}
                   <li class="home-list">
                     <div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
                         <h1><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h1>
-                        <p class="date"><time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%Y" }}</time></p>
-                        <!-- <p class="">{% if post.description %}{{ post.description  | strip_html | strip_newlines | truncate: 120 }}{% else %}{{ post.content | strip_html | strip_newlines | truncate: 120 }}{% endif %}</p> -->
+                        <p class="date"><time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%B %d, %Y" }}</time></p>
+                        <p class="">{% if post.description %}{{ post.description  | strip_html | strip_newlines | truncate: 120 }}{% else %}{{ post.content | strip_html | strip_newlines | truncate: 120 }}{% endif %}</p>
                     </div>
                   </li>
                   {% endfor %}
+
               </ol>
           </article>
         </section>
