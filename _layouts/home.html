@@ -37,7 +37,7 @@
                   {% endfor %}
 
                   <lh><h2><span class="bb"><a href="/articles"><span style="color:#3b3b3b">Articles</span> ⇝</a></span></h2></lh>
-                  {% for post in site.categories.talks limit: 3 %}
+                  {% for post in site.categories.articles limit: 3 %}
                   <li class="home-list">
                     <div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
                         <h1><a href="{% if post.rel %}{{ post.rel }}{% else %}{{site.url}}{{ post.url }}{% endif %}">{{ post.title }}</a></h1>
@@ -46,7 +46,7 @@
                     </div>
                   </li>
                   {% endfor %}
-                  {% for post in site.categories.talks offset: 3 %}
+                  {% for post in site.categories.articles offset: 3 %}
                   <li class="home-list">
                     <div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
                         <h1><a href="{% if post.rel %}{{ post.rel }}{% else %}{{site.url}}{{ post.url }}{% endif %}">{{ post.title }}</a></h1>
