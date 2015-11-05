@@ -1,0 +1,9 @@
+---
+layout: post-no-feature
+title: "Zen of Refactoring"
+description: "These days microservices are all at rage. Everyone writes “small reusable components”. This is why proper refactoring techniques are still as relevant today as they were couple of years ago."
+category: articles
+rel: http://www.schibsted.pl/2015/10/zen-of-refactoring/
+date: '2015-10-20 18:00:00'
+tags: [programming, refactoring, techniques]
+---

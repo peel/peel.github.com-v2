@@ -1,25 +1,24 @@
 title:            Infix Notes
-tagline:          Notes on scala, java, play! and AOSP - the dev and the core of development hardcore curated by Piotr Limanowski. 
-description:      Notes on scala, java, play! and AOSP - the dev and the core of development hardcore curated by Piotr Limanowski.
+tagline:          Notes on scala, elixir and possibly java curated by Piotr Limanowski. 
+description:      Notes on scala, elixir and possibly java curated by Piotr Limanowski.
 #Comment out url when working locally to resolve base urls correctly
 url: http://peel.github.io
 
 # Owner/author information
 owner:
-  name:           Piotr Limanowski 
+  name:           Piotr Limanowski
   bio:            "Notes from somewhere inbetween software and delivery by Piotr Limanowski."
   email:          plimanowski@icloud.com
   twitter:        peel
   github:         peel
   instagram:      peel
   disqus:         peelblog
+  linkedin:       https://pl.linkedin.com/pub/piotr-limanowski/31/ba0/492
   photo:          https://pbs.twimg.com/profile_images/418525126536466432/GOuuCnWT_bigger.jpeg 
 
 # Links to include in top navigation
 # For external links add external: true
 links:
-  - title: About
-    url: /about
   - title: Resume
     url: /resume.pdf
   - title: Github
@@ -37,7 +36,7 @@ kramdown:
   footnote_nr: 1
   entity_output: as_char
   toc_levels: 1..6
-  use_coderay: false
+  enable_coderay: false
 
   coderay:
     coderay_line_numbers: 
