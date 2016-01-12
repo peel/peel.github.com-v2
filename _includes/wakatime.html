@@ -41,10 +41,7 @@
  var data = fold_data(parse_data(default_data));
  $.ajax({
      url: '{{site.api.wakatime}}',
-     data: {
-         format: 'json-api'
-     },
-     dataType: 'jsonp',
+     dataType: 'application/vnd.api+json',
      success: function(api_data) {
          data = parse_data(api_data);
      },
