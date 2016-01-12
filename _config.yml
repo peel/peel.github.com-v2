@@ -18,7 +18,7 @@ owner:
   photo:          https://avatars1.githubusercontent.com/u/505401?v=3&s=460
 
 api:
-  wakatime:       http://127.0.0.1:4001/wakatime
+  wakatime:       https://guarded-taiga-4084.herokuapp.com/wakatime
 
 # Links to include in top navigation
 # For external links add external: true
