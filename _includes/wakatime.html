@@ -42,6 +42,7 @@
  $.ajax({
      url: '{{site.api.wakatime}}',
      dataType: 'application/vnd.api+json',
+     contentType: 'application/vnd.api+json',
      success: function(api_data) {
          data = parse_data(api_data);
      },
