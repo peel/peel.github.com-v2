@@ -16,6 +16,9 @@ owner:
   linkedin:       https://pl.linkedin.com/pub/piotr-limanowski/31/ba0/492
   photo:          https://avatars1.githubusercontent.com/u/505401?v=3&s=460
 
+api:
+  wakatime:       http://127.0.0.1:4001/wakatime
+
 # Links to include in top navigation
 # For external links add external: true
 links:
