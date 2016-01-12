@@ -4,6 +4,7 @@
  }
  languages{
      display:block;
+     background-color: "#38B6AB";
      width:100%;
      height:2px;
      margin:0.2em 0 0 0;
@@ -38,29 +39,33 @@
          });
  };
  var fold_data = function(data){  return data.slice(0,4).concat([{name: "Other", percent: data.slice(4,data.length).map(function(d){return d.percent;}).reduce(function(previousValue, currentValue, currentIndex, array) {return previousValue + currentValue;})}]); }
- var data = fold_data(parse_data(default_data));
  $.ajax({
      url: '{{site.api.wakatime}}',
      headers: {Accept: 'application/vnd.api+json'},
      success: function(api_data) {
-         data = parse_data(api_data);
+         render(fold_data(parse_data(api_data)));
+     },
+     error: function() {
+         render(fold_data(parse_data(default_data)));
      },
      type: 'GET'
  });
- var color = d3.scale.linear()
-                     .domain([0, 5])
-               .range(["#38B6AB", "#000"]);
- var languagesContainer = d3.select("languages");
- var languages = languagesContainer.selectAll("language")
-                                   .data(data)
-                                   .enter()
-                                   .append("language")
-                                   .style("width",function(lang){return lang.percent + "%";})
-                                   .style("background-color", function(d, i) { return color(i); });
- var names = languagesContainer.selectAll("text")
-                               .data(data)
-                               .enter()
-                               .append("text")
-                               .style("width",function(lang){return 100/data.length + "%";})
-                               .text(function(lang){return lang.name + " " + lang.percent + "%";});
+var color = d3.scale.linear()
+                    .domain([0, 5])
+            .range(["#38B6AB", "#000"]);
+var languagesContainer = d3.select("languages");
+ var render = function(data){
+    var languages = languagesContainer.selectAll("language")
+                                    .data(data)
+                                    .enter()
+                                    .append("language")
+                                    .style("width",function(lang){return lang.percent + "%";})
+                                    .style("background-color", function(d, i) { return color(i); });
+    var names = languagesContainer.selectAll("text")
+                                .data(data)
+                                .enter()
+                                .append("text")
+                                .style("width",function(lang){return 100/data.length + "%";})
+                                .text(function(lang){return lang.name + " " + lang.percent + "%";});
+ }
 </script>
