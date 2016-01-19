@@ -6,7 +6,6 @@
      display:block;
      background-color: "#38B6AB";
      width:100%;
-     height:2px;
      margin:0.2em 0 0 0;
  }
  language{
@@ -14,7 +13,7 @@
      display:block;
      margin:0;
      padding:0;
-     height:100%;
+     height:2px;
  }
  text{
      float:left;
@@ -39,6 +38,10 @@
          });
  };
  var fold_data = function(data){  return data.slice(0,4).concat([{name: "Other", percent: data.slice(4,data.length).map(function(d){return d.percent;}).reduce(function(previousValue, currentValue, currentIndex, array) {return previousValue + currentValue;})}]); }
+ var wakatimeShamefulRound = function toFixed(value){
+     value = value || 0;
+     return Math.floor(value*10)/10;
+ }
  var color = d3.scale.linear()
                .domain([0, 5])
                .range(["#38B6AB", "#000"]);
@@ -48,7 +51,7 @@
                                        .data(data);
      languages.enter()
               .append("language");
-     languages.style("width",function(lang){return lang.percent + "%";})
+     languages.style("width",function(lang){return wakatimeShamefulRound(lang.percent) + "%";})
               .style("background-color", function(d, i) { return color(i); });
      languages.exit().remove();
 
@@ -57,7 +60,7 @@
      names.enter()
           .append("text");
      names.style("width",function(lang){return 100/data.length + "%";})
-          .text(function(lang){return lang.name + " " + lang.percent + "%";});
+          .text(function(lang){return lang.name + " " + wakatimeShamefulRound(lang.percent) + "%";});
      names.exit().remove();
  }
  render(fold_data(parse_data(default_data)));
