@@ -2,7 +2,7 @@ title:            Infix Notes
 tagline:          Notes on scala, elixir and possibly java curated by Piotr Limanowski. 
 description:      Notes on scala, elixir and possibly java curated by Piotr Limanowski.
 #Comment out url when working locally to resolve base urls correctly
-url: //peel.github.io
+url: https://codearsonist.com
 
 # Owner/author information
 owner:
