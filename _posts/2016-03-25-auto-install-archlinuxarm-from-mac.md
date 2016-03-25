@@ -1,11 +1,9 @@
 ---
-layout: post
+layout: post-no-feature
 title: Automated ArchLinuxARM Install for Raspberry
 description: "Installing Linux from tar archives is cumbersome. Then also OSX does not support EXT filesystems. Two quick, simple and automated ways to fix the issue."
 category: articles
 tags: [raspberry, docker, ansible, tutorial]
-image:
-  feature: cluster.png
 ---
 
 TL;DR Either grab my docker [image](//hub.docker.com/peelsky/rpi-sdcard-builder) (recommended), [provision](//github.com/peel/rpi-sdcard-builder) w/ vagrant
@@ -24,35 +22,7 @@ As I had a few more SD cards to flash I needed a copy of the image file. So here
 
 ## HowTo
 
-```bash
-#!/bin/bash
-
-# Step 0: Clone repository
-# The repository contains a VM to flash your SD card with
-git clone https://github.com/peel/rpi-sdcard-builder.git
-cd rpi-sdcard-builder/vagrant
-
-# Step 1: Find disk identifier
-# This is extremely important to get it right as the process will destroy
-# the contents of a given disk
-# The disk identifier has a form of 'diskX', ie for the following output:
-# /dev/disk2s1     233Gi  220Gi   12Gi    95% 57795408 3185810   95%   /
-# The disk identifier is disk2 (disk2s1 is a partition on disk2)
-df -h
-read -p "Enter disk identifier ie. disk2:" DISK_ID
-
-# Step 2: Provision VM
-# You will be asked for LOCAL (Macbook) sudo password
-# Remove --with-image if you don't want an .img file copy
-# The process might take quite some time complete depending on your network connection
-vagrant --disk-id=${DISK_ID} --with-image -- up
-
-# Step 3: Wait
-echo "It's ready now!"
-
-# Step 4: Destroy the VM
-vagrant destroy || true
-```
+<script src="https://gist.github.com/peel/1067f6545a322916af5f.js"></script>
 
 ## Explained
 
@@ -72,26 +42,7 @@ Anyways, here's how to get it working.
 
 ## HowTo
 
-```bash
-#!/bin/bash
-
-# Step 0: Run the container
-# Downloads an image from docker hub and runs it with access to hardware in privileged mode
-docker run --rm --privileged -v $(pwd):/backup peelsky/rpi-sdcard-builder make copy
-
-# Step 1: Find disk identifier
-# This is extremely important to get it right as the process will destroy
-# the contents of a given disk
-# The disk identifier has a form of 'diskX', ie for the following output:
-# /dev/disk2s1     233Gi  220Gi   12Gi    95% 57795408 3185810   95%   /
-# The disk identifier is disk2 (disk2s1 is a partition on disk2)
-df -h
-read -p "Enter disk identifier ie. disk2:" DISK_ID
-
-# Step 2: Flash SD card(s)
-# Copy image to SD card
-sudo dd bs=1m if=sdcard.img of=/dev/$(DISK_ID)
-```
+<script src="https://gist.github.com/peel/be19e1165a9856e2ce1f.js"></script>
 
 ## Explained
 That's all? Really? Well, yeah. The thing is the approach uses loop interfaces to create a 'virtual' disk device backed by an .img file that then gets shared with the local device. 
