@@ -45,7 +45,7 @@ read -p "Enter disk identifier ie. disk2:" DISK_ID
 # You will be asked for LOCAL (Macbook) sudo password
 # Remove --with-image if you don't want an .img file copy
 # The process might take quite some time complete depending on your network connection
-vagrant --disk-id=${DISK_ID} --with-image -- u
+vagrant --disk-id=${DISK_ID} --with-image -- up
 
 # Step 3: Wait
 echo "It's ready now!"
@@ -59,22 +59,43 @@ vagrant destroy || true
 The first issue I stumbled upon was the way VirtualBox handles (or not handles) Macbook's SD card reader.
 In order to do so you need to create a rawdisk that mirrors a physical device. With VirtualBox this means issuing following command: `VBoxManage internalcommands createrawvmdk -filename sd_card.vmdk -rawdisk /dev/disk2`. This will create a vmdk image mirroring physical disk2. However to do so you need to unmount all the partitions from disk2 by running: `diskutil unmountDisk /dev/disk2` and setting looser permissions to disk2 with `sudo chmod 0777 /dev/disk2`. Then the `VBoxManage storageattach --storagectl SATAController --port 1 --device 0 --type hdd --medium sd_card.vmdk` command will mount the rawimage into the running VM. Oh, and the OSX will mount the disk automatically into your devices and locks VirtualBox from fiddling with disk geometry. So you'd need to unmount all the partitions again. Thankfully you can work with the `diskarbitrationd` daemon that monitors connected disks and automatically mounts them. However running `launchctl unload com.apple.diskarbitrationd` might not be the best idea as it results with a failure whenever trying to bring it back. However the service responds correctly to standard kill signals, so in order to stop it we'd send SIGSTOP signal and SIGCONT to continue. So after getting the service's PID with `sudo launchctl list | grep diskarbitrationd | awk '{print $1}'`, we'd issue kill ie. `sudo kill -SIGSTOP 71` and bring the service back with `sudo kill -SIGCONT 71`. And in between that we'd run provisioning of the VM. As you've most likely noticed in the previous section, 
 
-### That's not how it reall works. 
+### That's not how it really works. 
 
-Vagrantfile is pretty much a ruby file that allows you to execute commands at given cycles of VM's life. Therfore all the vumbersome tasks have been codified in the file. First, I'm using GetoptLong to provide command flags for running the provisioning with. The VM will fail to provision if it's not configured properly. With the disk id set all the pre-tasks described above are ran along with the creation of a disk image, service status manipulation and attaching the disk image to the VM. The [provisioning itself]() is fairly simple and mirror's the process described at ArchLinuxARM's [installation guide]().
+Vagrantfile is pretty much a ruby file that allows you to execute commands at given cycles of VM's life. Therfore all the cumbersome tasks have been codified in the file. First, I'm using GetoptLong to provide command flags for running the provisioning with. The VM will fail to provision if it's not configured properly. With the disk id set all the pre-tasks described above are ran along with the creation of a disk image, service status manipulation and attaching the disk image to the VM. The [provisioning itself]() is fairly simple and mirror's the process described at ArchLinuxARM's [installation guide]().
 
 
 # Method 2: Docker (recommended)
 
+Docker, no matter what you think about it, is primarily made for application containers. 
+So it's better suited for exposing your applications rather than generating .img files, however, being able to do so and have the intermediary steps cached for future reference and simply download the container to generate the file is damn compelling. Which is probably why there are so many obvious misuses of Docker.
+Anyways, here's how to get it working.
+
 ## HowTo
+
 ```bash
-# Step 0: 
+#!/bin/bash
+
+# Step 0: Run the container
+# Downloads an image from docker hub and runs it with access to hardware in privileged mode
+docker run --rm --privileged -v $(pwd):/backup peelsky/rpi-sdcard-builder make copy
+
+# Step 1: Find disk identifier
+# This is extremely important to get it right as the process will destroy
+# the contents of a given disk
+# The disk identifier has a form of 'diskX', ie for the following output:
+# /dev/disk2s1     233Gi  220Gi   12Gi    95% 57795408 3185810   95%   /
+# The disk identifier is disk2 (disk2s1 is a partition on disk2)
+df -h
+read -p "Enter disk identifier ie. disk2:" DISK_ID
 
 # Step 1: Flash SD card(s)
-
+# Copy image to SD card
+sudo dd bs=1m if=sdcard.img of=/dev/$(DISK_ID)
 ```
 
 ## Explained
+That's all? Really? Well, yeah. The thing is the approach uses loop interfaces to create a 'virtual' disk device backed by an .img file that then gets shared with the local device. 
+Please remember that the container is ran through Docker Machine which in case of any issues is capable to run the container.
 
 # Footnotes
 
