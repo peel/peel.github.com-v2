@@ -1,23 +1,23 @@
 ---
 layout: post-no-feature
-title: Automated ArchLinuxARM Install for Raspberry
+title: Automated ArchLinuxARM Install Guide
 description: "Installing Linux from tar archives is cumbersome. Then also OSX does not support EXT filesystems. Two quick, simple and automated ways to fix the issue."
 category: articles
-tags: [raspberry, docker, ansible, tutorial]
+tags: [raspberry, odroid, docker, ansible, tutorial]
 ---
 
-TL;DR Either grab my docker [image](//hub.docker.com/peelsky/rpi-sdcard-builder) (recommended), [provision](//github.com/peel/rpi-sdcard-builder) w/ vagrant
+TL;DR Either grab my docker [image](//hub.docker.com/peelsky/rpi-sdcard-builder) (recommended) or [provision](//github.com/peel/rpi-sdcard-builder) w/ vagrant
 
-While building a wireless Raspberry Pi cluster to run Docker containers [fn:1] I got myself into an awkward, blind mexican standoff with OSX and EXT4.
+While building a wireless Raspberry Pi / ODROID-C2 cluster to run Docker containers [fn:1] I got myself into an awkward, blind mexican standoff with OSX and EXT4.
 You know, the OSX stares at the EXT4, the EXT4 stares at the OSX, they both can't see nothing but it feels like things might get gory again.
 I mean, looking at all that mess it might end up with me running yet another development VM, doing stuff, possibly producing a bunch of bash scripts, flashing SD cards and wiping the whole story from my concious self. I'd much rather prefer having a reproducible, cross-system solution to check out and run every now and then when adding new nodes to cluster, wiping the old ones, clean-installing the distro.
-So here's two simple and reproducible, single or two-command way to get the precious ArchLinuxARM/Alpine/... `tar.gz`s onto those SD cards.
+So here's how to conveniently get the precious ArchLinuxARM/Alpine/... `tar.gz`s onto those SD cards.
 
 # Method 1: Vagrant
 
 The first thing I came up with was obviously running all the stuff in a VM. 
 For that Vagrant is an invaluable solution. The VM is provisioned with ansible. The
-The original goal was to simply put an SD card, and have it running my Raspberry in a few minutes.
+The original goal was to simply put an SD card, and have it running my devices in a few minutes.
 As I had a few more SD cards to flash I needed a copy of the image file. So here it goes.
 
 ## HowTo
@@ -43,6 +43,11 @@ Anyways, here's how to get it working.
 ## HowTo
 
 <script src="https://gist.github.com/peel/be19e1165a9856e2ce1f.js"></script>
+
+Or... if you'd like to use another tar archive ie. perform the procedure for ODROID-C2:
+
+<script src="https://gist.github.com/peel/fd0b424fdc0b99a07859.js"></script>
+
 
 ## Explained
 That's all? Really? Well, yeah. The thing is the approach uses loop interfaces to create a 'virtual' disk device backed by an .img file that then gets shared with the local device. 

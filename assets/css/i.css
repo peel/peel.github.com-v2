@@ -127,6 +127,7 @@ p {
   font-size: 22px;
   font-weight: 300;
   line-height: 33px;
+  text-align: justify;
 }
 
 .intro {
@@ -465,7 +466,6 @@ header.site-header a.menu {
 }
 
 header.site-header hgroup h1, header.site-header nav ul {
-  font-family: "Source Sans Pro", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
 }
 
 header.site-header hgroup {
@@ -594,7 +594,6 @@ header.site-header nav ul li a:hover {
   margin-top: 22px;
 }
 .article header .intro {
-  text-align: left;
 }
 
 .archive {
