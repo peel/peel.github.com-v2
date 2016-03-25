@@ -88,7 +88,7 @@ docker run --rm --privileged -v $(pwd):/backup peelsky/rpi-sdcard-builder make c
 df -h
 read -p "Enter disk identifier ie. disk2:" DISK_ID
 
-# Step 1: Flash SD card(s)
+# Step 2: Flash SD card(s)
 # Copy image to SD card
 sudo dd bs=1m if=sdcard.img of=/dev/$(DISK_ID)
 ```
@@ -96,6 +96,8 @@ sudo dd bs=1m if=sdcard.img of=/dev/$(DISK_ID)
 ## Explained
 That's all? Really? Well, yeah. The thing is the approach uses loop interfaces to create a 'virtual' disk device backed by an .img file that then gets shared with the local device. 
 Please remember that the container is ran through Docker Machine which in case of any issues is capable to run the container.
+All that the container does is pretty much downloading a raw archlinux image, necessary packages and a linux archive. All the rest happens through the Makefile which means with first steps done manually (tar download and packages installation) you can use the Makefile on a Linux box as well. Now that's insanely helpful use the Makefile on a Linux box as well. Now that's insanely helpful.
+The Makefile itself is rather straight-forward it creates a backing img file with `dd if=/dev/zero of=sdcard.img bs=1M count=1850` and sets a loop device with `losetup ${ID} sdcard.img`, then partitions the image using `parted` into two partitions - boot for MBR and root with EXT4, untars onto the image and unmounts the image.
 
 # Footnotes
 
