@@ -6,7 +6,7 @@ category: articles
 tags: [raspberry, odroid, docker, ansible, tutorial]
 ---
 
-TL;DR Either grab my docker [image](//hub.docker.com/peelsky/rpi-sdcard-builder) (recommended) or [provision](//github.com/peel/rpi-sdcard-builder) w/ vagrant
+TL;DR Either grab my docker [image](//hub.docker.com/peelsky/arm-sdcard-builder) (recommended) or [provision](//github.com/peel/rpi-sdcard-builder) w/ vagrant
 
 While building a wireless Raspberry Pi / ODROID-C2 cluster to run Docker containers [fn:1] I got myself into an awkward, blind mexican standoff with OSX and EXT4.
 You know, the OSX stares at the EXT4, the EXT4 stares at the OSX, they both can't see nothing but it feels like things might get gory again.
