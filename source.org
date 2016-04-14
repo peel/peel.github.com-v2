@@ -1,0 +1,146 @@
+#+AUTHOR: Piotr Limanowski
+#+PROPERTY: BLOG Code Arsonist
+
+#+OPTIONS: ^:nil tags:nil
+#+OPTIONS: toc:nil num:nil
+#+SEQ_TODO: TODO READY DONE
+#+STARTUP: fninline overview
+
+* TODO Articles 
+** TODO Wireless ARM cluster :raspberry:odroid:arm:cluster:docker:vagrant:ansible:
+*** Idea
+*** Hardware
+**** Shopping list
+**** Soldering
+**** Wiring
+*** Software
+**** Prereqs
+**** Provisioning
+*** Running
+** TODO Automated ArchLinuxARM Install Guide :raspberry:odroid:arm:provisioning:docker:ansible:
+*TL;DR* Either grab my docker [[//hub.docker.com/peelsky/arm-sdcard-builder][image]] (recommended) or [[//github.com/peel/rpi-sdcard-builder][provision]] w/ vagrant
+
+While building a wireless Raspberry Pi / ODROID-C2 cluster to run Docker containers [fn:1] I got myself into an awkward, blind mexican standoff with OSX and EXT4.
+You know, the OSX stares at the EXT4, the EXT4 stares at the OSX, they both can't see nothing but it feels like things might get gory again.
+I mean, looking at all that mess it might end up with me running yet another development VM, doing stuff, possibly producing a bunch of bash scripts, flashing SD cards and wiping the whole story from my concious self. I'd much rather prefer having a reproducible, cross-system solution to check out and run every now and then when adding new nodes to cluster, wiping the old ones, clean-installing the distro.
+So here's how to conveniently get the precious ArchLinuxARM/Alpine/... =tar.gz=s onto those SD cards.
+*** Method 1: Vagrant
+The first thing I came up with was obviously running all the stuff in a VM. 
+For that Vagrant is an invaluable solution. The VM is provisioned with ansible. The
+The original goal was to simply put an SD card, and have it running my devices in a few minutes.
+As I had a few more SD cards to flash I needed a copy of the image file. So here it goes.
+**** HowTo
+<script src="https://gist.github.com/peel/1067f6545a322916af5f.js"></script>
+**** Explained
+The first issue I stumbled upon was the way VirtualBox handles (or not handles) Macbook's SD card reader.
+In order to do so you need to create a rawdisk that mirrors a physical device. With VirtualBox this means issuing following command: =VBoxManage internalcommands createrawvmdk -filename sd_card.vmdk -rawdisk /dev/disk2=. This will create a vmdk image mirroring physical disk2. However to do so you need to unmount all the partitions from disk2 by running: =diskutil unmountDisk /dev/disk2= and setting looser permissions to disk2 with =sudo chmod 0777 /dev/disk2=. Then the =VBoxManage storageattach --storagectl SATAController --port 1 --device 0 --type hdd --medium sd_card.vmdk= command will mount the rawimage into the running VM. Oh, and the OSX will mount the disk automatically into your devices and locks VirtualBox from fiddling with disk geometry. So you'd need to unmount all the partitions again. Thankfully you can work with the =diskarbitrationd= daemon that monitors connected disks and automatically mounts them. However running =launchctl unload com.apple.diskarbitrationd= might not be the best idea as it results with a failure whenever trying to bring it back. However the service responds correctly to standard kill signals, so in order to stop it we'd send SIGSTOP signal and SIGCONT to continue. So after getting the service's PID with =sudo launchctl list | grep diskarbitrationd | awk '{print $1}'=, we'd issue kill ie. =sudo kill -SIGSTOP 71= and bring the service back with =sudo kill -SIGCONT 71=. And in between that we'd run provisioning of the VM. As you've most likely noticed in the previous section, 
+***** That's not how it really works.
+Vagrantfile is pretty much a ruby file that allows you to execute commands at given cycles of VM's life. Therfore all the cumbersome tasks have been codified in the file. First, I'm using GetoptLong to provide command flags for running the provisioning with. The VM will fail to provision if it's not configured properly. With the disk id set all the pre-tasks described above are ran along with the creation of a disk image, service status manipulation and attaching the disk image to the VM. The [provisioning itself]() is fairly simple and mirror's the process described at ArchLinuxARM's [installation guide]().
+*** Method 2: Docker (recommended)
+Docker, no matter what you think about it, is primarily made for application containers. 
+So it's better suited for exposing your applications rather than generating .img files, however, being able to do so and have the intermediary steps cached for future reference and simply download the container to generate the file is damn compelling. Which is probably why there are so many obvious misuses of Docker.
+Anyways, here's how to get it working.
+**** HowTo
+<script src="https://gist.github.com/peel/be19e1165a9856e2ce1f.js"></script>
+Or... if you'd like to use another tar archive ie. perform the procedure for ODROID-C2:
+<script src="https://gist.github.com/peel/fd0b424fdc0b99a07859.js"></script>
+**** Explained
+That's all? Really? Well, yeah. The thing is the approach uses loop interfaces to create a 'virtual' disk device backed by an .img file that then gets shared with the local device. 
+Please remember that the container is ran through Docker Machine which in case of any issues is capable to run the container.
+All that the container does is pretty much downloading a raw archlinux image, necessary packages and a linux archive. All the rest happens through the Makefile which means with first steps done manually (tar download and packages installation) you can use the Makefile on a Linux box as well. Now that's insanely helpful use the Makefile on a Linux box as well. Now that's insanely helpful.
+The Makefile itself is rather straight-forward it creates a backing img file with =dd if=/dev/zero of=sdcard.img bs=1M count=1850= and sets a loop device with =losetup ${ID} sdcard.img=, then partitions the image using =parted= into two partitions - boot for MBR and root with EXT4, untars onto the image and unmounts the image.
+*** Footnotes
+[fn:1] Invalid forward reference
+* TODO Talks
+** TODO Multi{ Platform, Paradigm} Programming :talks:elixir:scala:jinterface:4developers:
+SCHEDULED: <2016-04-14 Thu>
+:PROPERTIES:
+:EXPORT_JEKYLL_LAYOUT: post-no-feature
+:filename: 2016-04-14-multi-platform-paradigm-programming
+:END:
+Polyglot, multi-paradigm environments become the bread and butter of every developer's work. 
+With the drive towards microservices and reactive software developers start to look into Erlang/OTP platform more often. 
+The platform offers incredible tools we can't directly make use of from within JVM languages or can we?
+
+The talk shows the integration between JVM languages and BEAM's LFE/Elixir. 
+The fundamental pattern that will be explored are Erlang/OTP as a base platform/language and a JVM-based data access layer.
+We will explore JInterface, a set of Java classes which are used to make communication between JVM languages and Erlang, providing a message-based protocol.
+To illustrate the concepts and the value coming from running such systems, a distributed cluster is used for demo.
+*** Repository
+available at [[http://github.com/peel/multi.git][peel/multi]]
+*** Slides
+available at [[https://speakerdeck.com/peel/multi-platform-paradigm-programming][Speakerdeck]]
+*** Given at
+**** 4Developers,  11/04/16,  Warsaw, PL
+** TODO De⎇ it! The Error Handling Techniques :talks:scala:elixir:4developers:
+Usually errors in imperative languages are handled by try-catch block or checking that each operation (function) returned as expected.
+This causes a lot of defensive coding with if-wrapping of code blocks. With more functional approach it is way easier to do so...
+The talk introduces two models of error handling: Erlang-inspired let it crash and foldable, Either-type and Kleisli composition related approach.
+The approaches differ in terms of their usecases thus they will be presented in a frame of a typical web application stack. 
+The let it crash approach works very well on internal backend processing whereas the latter works great for exposing frontends to the client.
+The goal of the presentation is to expose listener to less imperative error handling techniques. 
+Hopefully after the presentation the listener will be able to identify the parts in his projects where the models are applicable and valueble.
+*** Repository
+available at [[http://github.com/peel/multi.git][peel/derailit]]
+*** Slides
+available at [[https://speakerdeck.com/peel/derail-it-error-handling-techniques][Speakerdeck]]
+*** Given at
+**** 4Developers,  11/04/16,  Warsaw, PL
+** TODO C-4: BEAM the JVM                        :talks:erlang:scala:elixir:
+The drive towards microservices and reactive software uncovers patterns that have been identified and implemented for years.
+Erlang is seen as a corner stone of distributed, actor-based concurrent programming. Much work has been done to implement Erlang's philosophy for the JVM.
+Yet is it even remotely possible to have a full coverage of the battle-tested Erlang platform running on Java Virtual Machine?
+To have a general idea of how the platforms differ 4 Cs will be mentioned: (Basic) Comparison, Code, Concurrency, (Garbage) Collection
+
+The talk identifies the differences between both platforms. We will focus on topics such as programming model, bytecode, memory model, garbage collection. 
+We will also touch the topics of deployment and tooling.
+Starting off with the very basis of concurrency-free platform focused solely on distributed computing (processes  threads) we will move onto programming model. 
+The talk will compare JVM languages' object-oriented legacy with Elixir's purely functional approach.
+For memory model and garbage collection we will analyse differences between JVM's common heap and BEAM's per-proceess heap and GC.
+Hopefully it will give a basic understanding of Erlang programming platfrom and impact the way of thinking about it's fundamental 'let it crash' (therfore C4) principles.
+** TODO Forgetting Java: Why Java Should Die in Flames and Take it's Developers Along :talks:java:scala:ruby:elixir:jdd:
+Java is old. Java is verbose. Java is ugly. Java is mocked and ridiculed by everyone and their dog.
+Hell, Java is dead. Well it's not but I'm preaching to the choir. Or am I? 
+However convenient to say so, it's not exclusively Oracle to blame for Java's current state of the art. 
+Java developers are guilty of laziness (the wrong kind), not questioning the tools they use (wrong again), 
+following patterns (pretty much the right kind) they believe are blessed upon them yadda yadda yadda. 
+Yet the communities around languages we find to be even lesser than Java offer world of a difference. 
+The talk shows the tools, experiences and mindset we lack in the Java world. 
+The virtues present elsewhere but needed here for Java to wipe the "enterprise-grade" solutions off the face of the world. 
+Let's do this people. Let's do the right thing and get rid of the "enterprise" Java developers.
+*** Video
+available at [[https://www.youtube.com/watch?v=LOcLwnV4Z2k][YouTube]]
+*** Slides
+available at [[https://speakerdeck.com/peel/forgetting-java-why-java-should-die-in-flames-and-take-its-developers-along][Speakerdeck]]
+*** Given at
+**** JDD, 03/10/15,  Cracow, PL
+** TODO M-Words for the Rest of Us     :talks:scala:javascript:lambdalounge:
+Monoids, functors, monads, categories and morphisms. Functional programmers often use their magick spells.
+Do we need to care? Is it elitism or a real thing? Functional programming matters and it needs to be in everyones programming toolkit.
+The talk introduces practical side of category theory and abstract algebra. From imperative to functional code in a small refactoring steps.
+*** Repository & slides
+available at [[http://github.com/peel/ll-monads][peel/ll-monads]]
+** TODO Guava: The New java.common                     :talks:java:internal:
+While refactoring and reviewing another team's code I was overwhelmed by the range 
+of different solutions to same problems, 'clever' hacks.
+The intention of the talk was to show off how Guava simplifies writing Java code.
+** TODO Zen of Refactoring                                  :talks:java:jug:
+Software refactoring is hard. We need teachers, good practices, rules. We need peace, focus and ideas. 
+We need the Zen-like rules for keeping our minds in check.
+The talk maps the Zen practices onto software refactoring using the Red-Green-Refactor and Mikado Method.
+*** Slides
+available at [[https://speakerdeck.com/peel/zen-of-refactoring][Speakerdeck]]
+*** Given at
+**** TriCity JUG, 2014, Gdansk, PL
+** TODO SOLID Principles of OO                          :talks:oop:java:jug:
+A comprehensive summary of SOLID principles of OO. Kind of a rant. Talk I've made for JUG several years ago.
+*** Video
+available at [[https://www.youtube.com/watch?v=LOcLwnV4Z2k][YouTube]]
+*** Slides
+available at [[https://speakerdeck.com/peel/forgetting-java-why-java-should-die-in-flames-and-take-its-developers-along][Speakerdeck]]
+* TODO Home
+* TODO About
+Piotr is a señor code arsonist based in Gdansk, PL. 
+He has been developing scalable web products since early 2000s with variety of languages (Java, Scala, Ruby, Javascript and Elixir).
+Focused on delivering value to products and constatly working on simplyfing things. 
+Aside from that he is el modo evil brujito and a future hoverboard owner.
